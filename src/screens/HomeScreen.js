@@ -1,21 +1,24 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-
+import { QRCode } from 'react-native-custom-qr-codes-expo';
 
 function HomeScreen({ navigation }) {
+	const info = {
+		name: 'Huzaifah y. Attah',
+		role: 'Human Being',
+	};
 	return (
 		<View style={styles.parentContainer}>
 			<View style={styles.container}>
 				<View style={styles.headerContent}>
-					<Text>exchange contact information</Text>
-					<Text>Scan this QR below to share your contacts</Text>
+					<Text style={styles.heading}>exchange contact information</Text>
+					<Text style={styles.paragraph}>
+						Scan this QR below to share your contacts
+					</Text>
 				</View>
 
 				<View style={styles.qrImgContainer}>
-					<Image
-						source={require('../../assets/img7.jpeg')}
-						style={styles.qrImg}
-					/>
+					<QRCode content="Huzaifah" style={styles.qrImg} />
 				</View>
 
 				<View style={styles.profile}>
@@ -45,8 +48,6 @@ function HomeScreen({ navigation }) {
 					</TouchableOpacity>
 				</View>
 			</View>
-
-
 		</View>
 	);
 }
@@ -61,13 +62,26 @@ const styles = StyleSheet.create({
 		marginHorizontal: 50,
 		justifyContent: 'space-evenly',
 	},
+	heading: {
+		fontWeight: 'bold',
+		textTransform: 'capitalize',
+		fontSize: 18,
+	},
+	paragraph: {
+		color: 'gray',
+		fontSize: 17,
+		marginTop: 15,
+	},
 	qrImgContainer: {
 		height: 300,
+		alignSelf: 'center',
 	},
 
 	qrImg: {
-		width: '100%',
-		height: '100%',
+		// width: '100%',
+		// height: '100%',
+		// alignSelf: 'center',
+		// backgroundColor: 'red',
 	},
 	profile: {
 		flexDirection: 'row',
