@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { EvilIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function ScannerComponent({ navigation }) {
 	const [hasPermission, setHasPermission] = useState(null);
@@ -37,19 +39,31 @@ export default function ScannerComponent({ navigation }) {
 	return (
 		<View style={styles.parentContainer}>
 			<View style={styles.container}>
+				<View style={styles.control}>
+					<View style={styles.controlContent}>
+						<Ionicons
+							name="ios-flash"
+							size={30}
+							color="gray"
+							onPress={() => {
+								navigation.navigate('Welcome');
+							}}
+						/>
+						<EvilIcons
+							name="close"
+							size={30}
+							color="white"
+							onPress={() => {
+								navigation.navigate('Home');
+							}}
+						/>
+					</View>
+				</View>
+
 				<BarCodeScanner
 					onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
 					style={StyleSheet.absoluteFillObject}
 				/>
-
-				{/* {scanned && (
-					<TouchableOpacity
-						onPress={() => setScanned(false)}
-						style={styles.btnnContainer}
-					>
-						<Text style={styles.btnnTxt}>Tap to Scan Again</Text>
-					</TouchableOpacity>
-				)} */}
 			</View>
 
 			<View style={styles.bottom}>
@@ -79,6 +93,18 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		justifyContent: 'space-between',
 		// backgroundColor: 'yellow',
+	},
+	control: {
+		position: 'absolute',
+		top: '15%',
+		zIndex: 3,
+		width: '100%',
+		alignSelf: 'center',
+	},
+	controlContent: {
+		marginHorizontal: 30,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
 	},
 	bottom: {
 		position: 'absolute',
